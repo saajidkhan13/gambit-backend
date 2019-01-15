@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get '/stocks/chart/:id/3m', to: 'stocks#three_month'
       get '/stocks/chart/:id/1m', to: 'stocks#one_month'
       get '/stocks/chart/:id/1d', to: 'stocks#one_day'
+      get '/stocks/:id/news', to: 'stocks#news'
 
 
 
@@ -24,7 +25,9 @@ Rails.application.routes.draw do
       get '/stocks/sectors', to: 'stocks#sector_performance'
 
 
-      resources :users
+      resources :users, only: %i[create]
+      post '/login', to: 'auth#create'
+      get '/dashboard', to: 'users#dashboard'
       resources :portfolios
     end
   end

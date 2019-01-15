@@ -1,4 +1,5 @@
 class Api::V1::UsersController < ApplicationController
+  skip_before_action :authorized, only: %i[create]
   before_action :find_user, only: [:show, :edit, :update]
 
     def index
@@ -15,15 +16,20 @@ class Api::V1::UsersController < ApplicationController
       @user = User.new
     end
 
+    def dashboard
+      render json: { user: UserSerializer.new(current_user) }, status: :accepted
+    end
+
     def create
       @user = User.create(user_params)
-
       if @user.valid?
-        render json: { user: UserSerializer.new(@user) }, status: :created
+        @token = encode_token(user_id: @user.id)
+        render json: { user: UserSerializer.new(@user), jwt: @token }, status: :created
       else
-        render json: { message: 'Username already taken' }, status: :not_accepted
+        render json: { error: 'failed to create user' }, status: :not_acceptable
       end
     end
+
 
     def update
       @user.update(user_params)
@@ -37,11 +43,10 @@ class Api::V1::UsersController < ApplicationController
     private
 
     def user_params
-
-      params.require(:user).permit(:name, :email, :password, :password_digest, :funds, :address)
+      params.require(:user).permit(:name, :email, :password, :funds, :address)
     end
 
-    def find_maker
+    def find_user
       @user = User.find(params[:id])
     end
 
