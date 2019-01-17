@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 
       resources :users, only: %i[create]
       post '/login', to: 'auth#create'
-      get '/dashboard', to: 'users#dashboard'
+      get '/dashboard', to: 'users#profile'
       resources :portfolios
     end
   end
