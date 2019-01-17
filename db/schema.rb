@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2019_01_10_152327) do
     t.string "user_id"
     t.string "name"
     t.string "symbol"
-    t.integer "price_when_purchased"
+    t.float "price_when_purchased"
     t.integer "amount"
     t.string "sector"
     t.datetime "date_bought"

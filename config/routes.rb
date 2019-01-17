@@ -25,7 +25,7 @@ Rails.application.routes.draw do
       get '/stocks/sectors', to: 'stocks#sector_performance'
 
 
-      resources :users, only: %i[create]
+      resources :users, only: %i[create, index, show]
       post '/login', to: 'auth#create'
       get '/dashboard', to: 'users#profile'
       resources :portfolios
