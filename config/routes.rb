@@ -18,7 +18,6 @@ Rails.application.routes.draw do
 
 
 
-
       get '/stocks/price/:id', to: 'stocks#price'
       get '/stocks/tickers', to: 'stocks#tickers'
       get '/stocks/gainers-losers', to: 'stocks#gainers_losers'
