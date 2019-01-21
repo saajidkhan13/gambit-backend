@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       get '/stocks/chart/:id/1m', to: 'stocks#one_month'
       get '/stocks/chart/:id/1d', to: 'stocks#one_day'
       get '/stocks/:id/news', to: 'stocks#news'
-
+      get '/stocks/:id/company', to: 'stocks#company_info'
 
 
 

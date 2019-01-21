@@ -6,6 +6,9 @@ class Api::V1::PortfoliosController < ApplicationController
     render json: @portfolios
   end
 
+  def new
+    @user = User.new
+  end
 
   def show
     @portfolio = Portfolio.find(params[:id])
@@ -23,7 +26,7 @@ class Api::V1::PortfoliosController < ApplicationController
 
   def destroy
     @portfolio.destroy
-    render json: {message: 'yo you destroyed that portfolio'}
+    render json: {message: 'Portfolio has been deleted'}
   end
 
   private

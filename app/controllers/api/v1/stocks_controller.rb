@@ -65,8 +65,8 @@ class Api::V1::StocksController < ApplicationController
      render json: results, status: :ok
    end
 
-   def search
-     new_url = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=#{params[:id]}&apikey=O03EKUWUF75CUK4J"
+   def company_info
+     new_url="https://api.iextrading.com/1.0/stock/#{params[:id]}/company"
      results = JSON.parse(RestClient.get(new_url))
      render json: results, status: :ok
    end
