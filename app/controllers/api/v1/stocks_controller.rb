@@ -71,7 +71,6 @@ class Api::V1::StocksController < ApplicationController
      render json: results, status: :ok
    end
 
-
   def price
    new_url = "#{@url}stock/#{params[:id]}/price"
    result = RestClient.get(new_url)
@@ -106,6 +105,11 @@ class Api::V1::StocksController < ApplicationController
     render json: {sector: sector_results}, status: :ok
   end
 
+  def stats
+    new_url="https://api.iextrading.com/1.0/stock/#{params[:id]}/stats"
+    results = JSON.parse(RestClient.get(new_url))
+    render json: results, status: :ok
+  end
 
 
 
