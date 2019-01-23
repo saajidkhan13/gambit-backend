@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       get '/stocks/:id/news', to: 'stocks#news'
       get '/stocks/:id/company', to: 'stocks#company_info'
       get '/stocks/:id/stats', to: 'stocks#stats'
-
+      get '/markets', to: 'stocks#markets'
 
 
 
@@ -25,10 +25,12 @@ Rails.application.routes.draw do
       get '/stocks/sectors', to: 'stocks#sector_performance'
 
 
-      resources :users, only: %i[create, index, show]
+      resources :users, only: [:create, :index, :show, :update]
       post '/login', to: 'auth#create'
       get '/dashboard', to: 'users#profile'
+      get '/profile', to: 'auth#show_user'
       resources :portfolios
+      post '/portfolios', to: 'portfolio#create'
     end
   end
 end

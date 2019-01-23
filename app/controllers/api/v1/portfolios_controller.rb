@@ -7,7 +7,17 @@ class Api::V1::PortfoliosController < ApplicationController
   end
 
   def new
-    @user = User.new
+    @portfolio = Portfolio.new
+  end
+
+  def create
+
+    @portfolio = Portfolio.create(portfolio_params)
+    if @portfolio.valid?
+      render json: @portfolio, status: :created
+    else
+      render json: { error: 'failed to create purchase' }, status: :not_acceptable
+    end
   end
 
   def show
@@ -31,7 +41,7 @@ class Api::V1::PortfoliosController < ApplicationController
 
   private
 
-  def portfolio
+  def portfolio_params
     params.require(:portfolio).permit(:user_id, :name, :symbol, :price_when_purchased, :amount, :sector, :date_bought)
   end
 

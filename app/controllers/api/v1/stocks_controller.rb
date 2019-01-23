@@ -111,6 +111,11 @@ class Api::V1::StocksController < ApplicationController
     render json: results, status: :ok
   end
 
+  def markets
+    new_url="https://api.iextrading.com/1.0/market"
+    results = JSON.parse(RestClient.get(new_url))
+    render json: results, status: :ok
+  end
 
 
 
